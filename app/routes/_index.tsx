@@ -2,6 +2,7 @@ import type { MetaFunction } from "@remix-run/node";
 import { useNavigate } from "@remix-run/react";
 import Card from "~/components/card";
 import Input from "~/components/input";
+import supabase from "utils/supabase";
 
 import naimtar from "public/assets/images/naimtar.png"
 import keri from "public/assets/images/keri.png"
@@ -16,6 +17,11 @@ export const meta: MetaFunction = () => {
     { name: "description", content: "Built by naimroslan" },
   ];
 };
+
+export const loader = async () => {
+  const { data, error } = await supabase.from('dosa').insert({ dosa: 'azril', keyword: 'azrul', user_id: 1}).select()
+  return { data, error }
+}
 
 export default function Index() {
   const navigate = useNavigate()
