@@ -1,5 +1,14 @@
 import type { MetaFunction } from "@remix-run/node";
+import { useNavigate } from "@remix-run/react";
 import Card from "~/components/card";
+import Input from "~/components/input";
+
+import naimtar from "public/assets/images/naimtar.png"
+import keri from "public/assets/images/keri.png"
+import haziq from "public/assets/images/haziq.png"
+import azrilola from "public/assets/images/azrilola.jpg"
+import naim from "public/assets/images/naim.png"
+import Button from "~/components/button";
 
 export const meta: MetaFunction = () => {
   return [
@@ -9,6 +18,7 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const navigate = useNavigate()
   return (
     <div className="font-PressStart2P flex justify-center items-center h-screen" style={{ fontFamily: "", lineHeight: "1.8" }}>
       <div className="flex flex-col items-center space-y-10">
@@ -16,13 +26,45 @@ export default function Index() {
           Dosa Aksara
         </div>
         <div>
-          <input className="w-96 border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#3fdba7] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md"
-            placeholder="nyatakan dosa"
+          <Input 
+            placeholder = "nyatakan dosa"
           />
         </div>
         <div className="flex flex-row space-x-6">
-          <Card />
-          <Card />
+          <Card 
+            image={naimtar}
+            pendosa="Naimq" 
+          />
+          <Card 
+            image={keri}
+            pendosa="Keri On" 
+          />
+          <Card 
+            image={haziq}
+            pendosa="Haziq Ahhh" 
+          />
+          <Card 
+            image={azrilola}
+            pendosa="Azrilola" 
+          />
+          <Card 
+            image={naim}
+            pendosa="Naim" 
+          />
+        </div>
+        <div className="flex flex-row space-x-4">
+          <Button 
+            name="History"
+            color="bg-[#e0bffe]"
+            hoverColor="hover:bg-[#c9abe4]"
+            onclick={() => navigate("/history")}
+          />
+          <Button 
+            name="Submit"
+            color="bg-[#A6FAFF]"
+            hoverColor="hover:bg-[#79F7FF]"
+            onclick={() => navigate("/history")}
+          />
         </div>
       </div>
     </div>
