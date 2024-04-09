@@ -13,10 +13,10 @@ export default function Card({ pendosa, image, onclick }: any) {
         <article className="w-full h-full">
             <figure className="w-full h-1/2 border-black border-b-2">
               <img
-                  src={image}
-                  alt="thumbnail"
-                  className="w-52 h-52 object-cover"
-                  />
+                src={image}
+                alt="thumbnail"
+                className="w-52 h-52 object-cover"
+              />
             </figure>
             <div className="px-6 py-5 text-left h-full">
               <p className="text-base whitespace-nowrap mb-4">{pendosa}</p>

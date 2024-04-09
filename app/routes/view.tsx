@@ -1,14 +1,21 @@
-import { useLoaderData } from "@remix-run/react";
+import { LoaderFunctionArgs } from "@remix-run/node";
+import { json, useLoaderData } from "@remix-run/react";
 import { useNavigate } from "@remix-run/react";
-import supabase from "utils/supabase";
+import { useEffect } from "react";
+import { getDosa } from "~/api/dosa_api";
 
-export const loader = async () => {
-  const {data} = await supabase.from('dosa').select().range(0, 10)
-  return {data};
+export async function loader() {
+  return [
+    {
+      dosa: "tarak",
+      keyword: "tayar",
+      user_id: "1"
+    }
+  ]
 }
 
-export default function History() {
-  const {data}: any = useLoaderData();
+export default function View() {
+  const data = []
   const navigate = useNavigate()
 
   return(

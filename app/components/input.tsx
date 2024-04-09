@@ -1,9 +1,13 @@
 import React from "react"
 
-export default function Input({ placeholder }: any) {
+export default function Input({ placeholder, bgcolor, name, value, onChange }: any) {
   return(
-    <input className="w-96 border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] focus:bg-[#FFA6F6] active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md"
+    <input 
+      className={`w-[500px] border-black border-2 p-2.5 focus:outline-none focus:shadow-[2px_2px_0px_rgba(0,0,0,1)] ${bgcolor} active:shadow-[2px_2px_0px_rgba(0,0,0,1)] rounded-md`}
       placeholder={placeholder}
+      name={name}
+      value={value}
+      onChange={onChange}
     />
   )
 }
