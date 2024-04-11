@@ -3,7 +3,6 @@ import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
 import { Form, json, useActionData, useFetcher, useNavigate } from "@remix-run/react";
 import toast, { Toaster } from "react-hot-toast"
 
-import Card from "~/components/card";
 import Input from "~/components/input";
 import Button from "~/components/button";
 import PendosaRadio from "~/components/radio/pendosa";
@@ -29,12 +28,12 @@ export default function Index() {
   const [formDataState, setFormDataState] = useState({
     dosa: '',
     keyword: '',
-    pendosa: ''
+    user_id: ''
   })
 
   const handleRadioClick = (id) => {
     setIsSelectedId(id)
-    setFormDataState({ ...formDataState, pendosa: id})
+    setFormDataState({ ...formDataState, user_id: id})
   }
 
   const handleChange = (e:any) => {
@@ -55,7 +54,7 @@ export default function Index() {
     const dosaPayload = {
       dosa: formDataState.dosa,
       keyword: formDataState.keyword,
-      pendosa: formDataState.pendosa
+      user_id: formDataState.user_id
     }
 
     const dataToActionFetcherVer = {
@@ -66,10 +65,19 @@ export default function Index() {
     try {
       addNewDosaForm.submit(dataToActionFetcherVer, { method: "post", action: "/action/sendNewDosaResponse" })
       toast.success("Added new dosa!")
-      // Delay navigation by 1 second
-      setTimeout(() => {
-        navigate("/view")
-      }, 1000);
+
+      // // Delay navigation by 1 second
+      // setTimeout(() => {
+      //   navigate("/view")
+      // }, 1000);
+
+      // reset the inputs 
+      setFormDataState({
+        dosa: '',
+        keyword: '',
+        user_id: ''
+      })
+      setIsSelectedId(null)
     } catch (err) {
       toast.error("Failed to add new Dosa!")
       console.error("Error: ", err)
@@ -81,11 +89,12 @@ export default function Index() {
       <div>
         <Toaster />
       </div>
-      <Form>
-        <div className="flex flex-col items-center space-y-10">
-          <div className="text-4xl font-semibold text-[#121212]">
-            Dosa Aksara
-          </div>
+      <div className="flex flex-col justify-center items-center space-y-6">
+        <Form>
+          <div className="flex flex-col items-center space-y-10">
+            <div className="text-4xl font-semibold text-[#121212]">
+              Dosa Aksara
+            </div>
             <div>
                 <Input 
                   placeholder = "nyatakan dosa eg. tarak"
@@ -147,22 +156,26 @@ export default function Index() {
               />
             </div>
             <div className="flex flex-row space-x-4">
-              <Button 
-                name="View All"
-                color="bg-[#e0bffe]"
-                hoverColor="hover:bg-[#c9abe4]"
-                onclick={() => navigate("/view")}
-              />
               <Button
-                type=""
+                type="submit"
                 name="Submit"
                 color="bg-[#A6FAFF]"
                 hoverColor="hover:bg-[#79F7FF]"
                 onclick={handleSubmit}
               />
             </div>
+          </div>
+        </Form>
+        <div>
+          <Button 
+            type=""
+            name="View All"
+            color="bg-[#e0bffe]"
+            hoverColor="hover:bg-[#c9abe4]"
+            onclick={() => navigate("/view")}
+          />
         </div>
-      </Form>
+      </div>
     </div>
   );
 }
